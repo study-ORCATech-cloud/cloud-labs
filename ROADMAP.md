@@ -23,6 +23,16 @@ The labs are organized by cloud provider and progress from basic to advanced tas
 | LAB08 | S3 Lifecycle + Versioning         | Automate retention, optimize storage costs             |
 | LAB09 | Route 53 + Custom Domain          | Set up DNS records and domain routing                  |
 | LAB10 | Lambda + API Gateway              | Deploy serverless functions with RESTful APIs          |
+| LAB11 | Cognito Authentication            | Implement user management and identity federation      |
+| LAB12 | SQS + SNS + EventBridge           | Event-driven architecture and message queues           |
+| LAB13 | DynamoDB NoSQL                    | Build NoSQL database solutions                         |
+| LAB14 | CloudFront + WAF                  | Deploy global CDN with web application firewall        |
+| LAB15 | Elastic Beanstalk                 | Deploy and scale web applications                      |
+| LAB16 | Step Functions State Machines     | Orchestrate serverless workflows                       |
+| LAB17 | CloudFormation Templates          | Infrastructure as Code with CloudFormation             |
+| LAB18 | ECR + ECS Containers              | Containerized applications with ECR and ECS            |
+| LAB19 | Secrets Manager + Parameter Store | Secure management of credentials and configurations    |
+| LAB20 | Athena + Glue Data Analytics      | Query and transform data at scale                      |
 
 #### Azure Labs
 | Lab   | Title                             | Description                                            |
@@ -55,13 +65,6 @@ The labs are organized by cloud provider and progress from basic to advanced tas
 ---
 
 ### ⏳ Planned Labs (Coming Soon)
-
-#### AWS
-| Lab   | Title                             | Description                                            |
-|--------|----------------------------------|--------------------------------------------------------|
-| LAB11 | CloudFront Static Site            | Deliver website content via CDN                        |
-| LAB12 | Athena Querying                   | Query S3 data using SQL with Athena                    |
-| LAB13 | ECS Fargate Deployment            | Run containers without managing servers                |
 
 #### Azure
 | Lab   | Title                             | Description                                            |

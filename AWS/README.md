@@ -43,6 +43,20 @@ For these labs, we recommend creating an IAM user with programmatic access:
 | [LAB09-Route53-DNS](./LAB09-Route53-DNS/) | Route 53 | Set up DNS for your resources | Domain registration, record sets, routing policies |
 | [LAB10-Lambda-API-Gateway](./LAB10-Lambda-API-Gateway/) | Lambda & API Gateway | Build serverless APIs | Serverless computing, API development, integrations |
 
+### Advanced Labs 
+| Lab | Service Focus | Description | Skills Learned |
+|-----|---------------|-------------|----------------|
+| [LAB11-Cognito-Authentication](./LAB11-Cognito-Authentication/) | Amazon Cognito | Implement user authentication for apps | User pools, identity pools, OAuth flows, JWT tokens |
+| [LAB12-SQS-SNS-EventBridge](./LAB12-SQS-SNS-EventBridge/) | SQS, SNS & EventBridge | Build event-driven architectures | Messaging patterns, pub/sub, event routing |
+| [LAB13-DynamoDB-NoSQL](./LAB13-DynamoDB-NoSQL/) | Amazon DynamoDB | Work with NoSQL database | Key-value storage, document model, DAX caching |
+| [LAB14-CloudFront-WAF](./LAB14-CloudFront-WAF/) | CloudFront & WAF | Secure content delivery | CDN configuration, edge computing, security rules |
+| [LAB15-Elastic-Beanstalk](./LAB15-Elastic-Beanstalk/) | Elastic Beanstalk | Deploy apps with PaaS | Application platforms, environment configs, CI/CD |
+| [LAB16-Step-Functions-State-Machines](./LAB16-Step-Functions-State-Machines/) | AWS Step Functions | Create serverless workflows | State management, error handling, service integration |
+| [LAB17-CloudFormation-Templates](./LAB17-CloudFormation-Templates/) | CloudFormation | Implement infrastructure as code | Template structure, stack management, parameters |
+| [LAB18-ECR-ECS-Containers](./LAB18-ECR-ECS-Containers/) | ECR & ECS | Deploy containerized applications | Docker registry, task definitions, service scaling |
+| [LAB19-Secrets-Manager-Parameter-Store](./LAB19-Secrets-Manager-Parameter-Store/) | Secrets Manager & SSM | Secure configuration management | Secret rotation, parameter hierarchy, encryption |
+| [LAB20-Athena-Glue-Data-Analytics](./LAB20-Athena-Glue-Data-Analytics/) | Athena & Glue | Analyze data with serverless tools | SQL queries, data catalogs, ETL processing |
+
 ## 🚶 Learning Path
 
 These labs are designed to be completed sequentially, as each builds upon skills from previous labs:
@@ -51,6 +65,7 @@ These labs are designed to be completed sequentially, as each builds upon skills
 2. **Networking** (Labs 4-5): Build and scale application infrastructures
 3. **Operations** (Labs 6-8): Master monitoring, databases, and advanced storage
 4. **Advanced Services** (Labs 9-10): Implement DNS and serverless architectures
+5. **Advanced Applications** (Labs 11-20): Build sophisticated cloud solutions using multiple integrated services
 
 ## 📝 Lab Structure
 
