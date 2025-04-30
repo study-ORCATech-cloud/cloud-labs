@@ -6,7 +6,7 @@ A curated, hands-on collection of beginner-to-advanced labs that teach cloud ski
 
 ## 🌐 About This Repository
 
-This project is ideal for learners who want to understand how cloud platforms work at a hands-on level — provisioning, configuring, and managing real resources directly through the UI and CLI. It’s the perfect step before diving into automation and DevOps tooling.
+This project is ideal for learners who want to understand how cloud platforms work at a hands-on level — provisioning, configuring, and managing real resources directly through the UI and CLI. It's the perfect step before diving into automation and DevOps tooling.
 
 ---
 
@@ -17,21 +17,51 @@ cloud-labs/
 │
 ├── AWS/                      # AWS UI & CLI labs
 │   ├── LAB01-EC2-Instance/
-│   ├── LAB02-S3-Bucket/
-│   └── ...
+│   ├── LAB02-S3-Bucket-Policy/
+│   ├── LAB03-IAM-Users-Groups/
+│   ├── LAB04-VPC-Networking/
+│   ├── LAB05-ELB-AutoScaling/
+│   ├── LAB06-CloudWatch-Monitoring/
+│   ├── LAB07-RDS-MySQL/
+│   ├── LAB08-S3-Lifecycle-Versioning/
+│   ├── LAB09-Route53-DNS/
+│   ├── LAB10-Lambda-API-Gateway/
+│   ├── LAB11-Cognito-Authentication/
+│   ├── LAB12-SQS-SNS-EventBridge/
+│   ├── LAB13-DynamoDB-NoSQL/
+│   ├── LAB14-CloudFront-WAF/
+│   ├── LAB15-Elastic-Beanstalk/
+│   ├── LAB16-Step-Functions-State-Machines/
+│   ├── LAB17-CloudFormation-Templates/
+│   ├── LAB18-ECR-ECS-Containers/
+│   ├── LAB19-Secrets-Manager-Parameter-Store/
+│   └── LAB20-Athena-Glue-Data-Analytics/
 │
 ├── Azure/                    # Azure UI & CLI labs
 │   ├── LAB01-Virtual-Machine/
 │   ├── LAB02-Storage-Account/
-│   └── ...
+│   ├── LAB03-AzureAD-Roles-Users/
+│   ├── LAB04-VNet-NSG-Peering/
+│   ├── LAB05-LoadBalancer-ScaleSet/
+│   ├── LAB06-Monitor-LogAnalytics/
+│   ├── LAB07-SQL-Database/
+│   ├── LAB08-Blob-Lifecycle-Policies/
+│   ├── LAB09-AzureDNS-CustomDomain/
+│   └── LAB10-Functions-HTTPTrigger/
 │
 ├── GCP/                      # GCP UI & CLI labs
 │   ├── LAB01-Compute-Engine/
-│   ├── LAB02-Cloud-Storage/
-│   └── ...
+│   ├── LAB02-Cloud-Storage-Bucket/
+│   ├── LAB03-IAM-Roles-ServiceAccounts/
+│   ├── LAB04-VPC-Firewall-Rules/
+│   ├── LAB05-LoadBalancer-InstanceGroup/
+│   ├── LAB06-CloudMonitoring-Logging/
+│   ├── LAB07-CloudSQL-PostgreSQL/
+│   ├── LAB08-Storage-Lifecycle-Retention/
+│   ├── LAB09-CloudDNS-CustomDomain/
+│   └── LAB10-CloudFunctions-HTTP/
 │
-└── Common/                   # Shared documentation and utilities
-    └── CLI-Setup.md          # Instructions for setting up CLI tools
+└── CLI-Setup.md          # Instructions for setting up CLI tools
 ```
 
 ---
@@ -47,7 +77,7 @@ To complete the labs, you'll need:
   - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
   - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 
-> CLI setup instructions are provided in [`Common/CLI-Setup.md`](./Common/CLI-Setup.md)
+> CLI setup instructions are provided in [`CLI-Setup.md`](./CLI-Setup.md)
 
 ---
 
@@ -92,7 +122,7 @@ Labs are designed to gradually increase in difficulty:
 
 ## 🗺️ Roadmap & Lab Index
 
-Looking for the full list of labs and what’s coming next?
+Looking for the full list of labs and what's coming next?
 
 👉 Check the full [ROADMAP.md](./ROADMAP.md)
 
