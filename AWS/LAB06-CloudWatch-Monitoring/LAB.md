@@ -77,47 +77,120 @@ By the end of this lab, you will be able to:
 
 ## ⚙️ Part 2: Install & Configure CloudWatch Agent
 
-### Step 1: Install the CloudWatch Agent
+### Step 1: Install the CloudWatch Agent and Tools
 
 ```bash
 # Update packages
 sudo yum update -y
 
-# Install the CloudWatch Agent
-sudo yum install -y amazon-cloudwatch-agent
+# Install the CloudWatch Agent and Stress tool
+sudo yum install -y amazon-cloudwatch-agent stress
 
-# Verify installation
+# Verify installation of CloudWatch Agent
 amazon-cloudwatch-agent-ctl -h
+
+# Verify installation of Stress tool
+stress --help
+
+# Install rsyslog to support "/var/log/" log files on Amazon Linux 2023
+sudo dnf install -y rsyslog
+
+# Start rsyslog service
+sudo systemctl enable rsyslog --now
 ```
 
-### Step 2: Configure the Agent using the Configuration Wizard
+### Step 2: Create CloudWatch Agent Configuration File
 
-The wizard will guide you through selecting metrics and logs to collect:
+Instead of using the configuration wizard (which can have inconsistent prompts), let's create a predefined configuration file:
 
 ```bash
-# Start the configuration wizard
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+# Create the configuration file directory if it doesn't exist
+sudo mkdir -p /opt/aws/amazon-cloudwatch-agent/etc
+
+# Create the CloudWatch Agent configuration file
+sudo tee /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json > /dev/null << EOF
+{
+  "agent": {
+    "metrics_collection_interval": 60,
+    "run_as_user": "root"
+  },
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/messages",
+            "log_group_name": "messages",
+            "log_stream_name": "{instance_id}",
+            "retention_in_days": 7
+          },
+          {
+            "file_path": "/var/log/secure",
+            "log_group_name": "secure",
+            "log_stream_name": "{instance_id}",
+            "retention_in_days": 7
+          }
+        ]
+      }
+    }
+  },
+  "metrics": {
+    "aggregation_dimensions": [
+      ["InstanceId"],
+      ["InstanceId", "InstanceType"]
+    ],
+    "append_dimensions": {
+      "AutoScalingGroupName": "\${aws:AutoScalingGroupName}",
+      "ImageId": "\${aws:ImageId}",
+      "InstanceId": "\${aws:InstanceId}",
+      "InstanceType": "\${aws:InstanceType}"
+    },
+    "metrics_collected": {
+      "disk": {
+        "measurement": [
+          "used_percent"
+        ],
+        "metrics_collection_interval": 60,
+        "resources": [
+          "*"
+        ]
+      },
+      "mem": {
+        "measurement": [
+          "mem_used_percent"
+        ],
+        "metrics_collection_interval": 60
+      },
+      "cpu": {
+        "measurement": [
+          "cpu_usage_idle",
+          "cpu_usage_user",
+          "cpu_usage_system"
+        ],
+        "metrics_collection_interval": 60,
+        "totalcpu": true
+      }
+    }
+  }
+}
+EOF
+
+# Verify the configuration file was created
+cat /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 ```
 
-When prompted, select the following options:
-1. Choose `1` (EC2 instance monitoring)
-2. Choose `1` (Basic monitoring) or `2` (Standard monitoring) based on your needs
-3. Select `Yes` for detailed monitoring metrics (CPU per core, disk I/O)
-4. Select `Yes` to collect memory metrics
-5. Select both root and data disk metrics if applicable
-6. Select `Yes` to collect log files
-7. Add log file path: `/var/log/messages`
-8. Add another log file path: `/var/log/secure` (for SSH connection logs)
-9. Choose `1` (Default configuration) for CloudWatch log group name or customize
-10. Specify a region or leave default
-11. Choose `1` (No proxy) unless your environment uses a proxy
+This configuration file will:
+- Collect CPU, memory, and disk metrics every 60 seconds
+- Monitor system logs from `/var/log/messages` and SSH logs from `/var/log/secure`
+- Set a 7-day retention period for logs
+- Use instance ID and type for metric dimensions
 
 ### Step 3: Start the Agent with Your Configuration
 
 ```bash
 # Start the agent with the created configuration
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
-  -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+  -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json -s
 
 # Verify the agent is running
 sudo systemctl status amazon-cloudwatch-agent
@@ -137,10 +210,8 @@ logger "CloudWatch Lab - ERROR: Simulated error message"
 logger "CloudWatch Lab - WARNING: Simulated warning message"
 
 # View your log entries
-tail /var/log/messages
+sudo tail /var/log/messages
 ```
-
-> Note: If `stress` is not installed, you can install it with `sudo yum install -y stress`
 
 ---
 
@@ -171,7 +242,7 @@ tail /var/log/messages
 
 1. Navigate to **CloudWatch > Metrics** in the AWS Management Console
 2. Find and select the **CWAgent** namespace
-3. Click on **Instance, InstanceId, ImageId, InstanceType**
+3. Click on **InstanceId, ImageId, InstanceType**
 4. Check the box next to metrics like `cpu_usage_idle` and `mem_used_percent`
 5. Observe the graph showing your instance's metrics
 6. Experiment with the graph settings (time range, statistics, period)
@@ -195,7 +266,7 @@ tail /var/log/messages
 1. Navigate to **CloudWatch > Alarms > All alarms**
 2. Click **Create alarm**
 3. Click **Select metric**
-4. Navigate to **CWAgent > ImageId, InstanceId, InstanceType, instance**
+4. Navigate to **CWAgent > ImageId, InstanceId, InstanceType**
 5. Select the `cpu_usage_idle` metric for your instance
 6. Click **Select metric**
 7. Change the statistic to **Average** and period to **1 minute**
@@ -204,11 +275,12 @@ tail /var/log/messages
 9. Click **Next**
 10. Under **Notification**, select **Create new topic**
 11. Enter topic name `HighCPUAlarm` and your email address
-12. Click **Create topic**
+12. Click **Create topic** and create the topic
 13. Click **Next**
 14. Enter an alarm name `HighCPUUsage-EC2Instance` and description
 15. Click **Next**
 16. Review and click **Create alarm**
+17. Log In to your email and approve subscription
 
 ### Step 2: Test the Alarm
 
