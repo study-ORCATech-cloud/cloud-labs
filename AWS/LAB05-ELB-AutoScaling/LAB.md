@@ -229,16 +229,16 @@ The Auto Scaling Group will manage EC2 instances based on your scaling policies,
 
 1. Navigate to **EC2 > Auto Scaling Groups** in the AWS Console
 2. Click **Create Auto Scaling group**
-3. **Step 1: Choose launch template or configuration**
+3. Choose **launch template or configuration**
    - **Auto Scaling group name**: `lab05-web-asg`
    - **Launch template**: Select `lab05-web-template` you created earlier
    - **Version**: Latest 
    - Click **Next**
-4. **Step 2: Choose instance launch options**
+4. Choose **instance launch options**
    - **VPC**: Select your default VPC
    - **Availability Zones and subnets**: Select at least two Availability Zones
    - Click **Next**
-5. **Step 3: Configure advanced options**
+5. **Configure advanced options**
    - **Load balancing**:
      - Select **Attach to an existing load balancer**
      - Select **Choose from your load balancer target groups**
@@ -247,7 +247,7 @@ The Auto Scaling Group will manage EC2 instances based on your scaling policies,
      - Enable **ELB** health checks
      - **Health check grace period**: 120 seconds
    - Click **Next**
-6. **Step 4: Configure group size and scaling policies**
+6. **Configure group size and scaling policies**
    - **Desired capacity**: 2
    - **Minimum capacity**: 1
    - **Maximum capacity**: 4
@@ -257,14 +257,14 @@ The Auto Scaling Group will manage EC2 instances based on your scaling policies,
      - **Target value**: 50
      - **Instance warmup**: 300 seconds
    - Click **Next**
-7. **Step 5: Add notifications** (optional)
+7. **Add notifications** (optional)
    - Skip for this lab
    - Click **Next**
-8. **Step 6: Add tags** (optional)
+8. **Add tags** (optional)
    - Add a tag with Key: `Name`, Value: `lab05-web-instance`
    - This tag will be applied to all instances created by the ASG
    - Click **Next**
-9. **Step 7: Review**
+9. **Review**
    - Review all your settings
    - Click **Create Auto Scaling group**
 
