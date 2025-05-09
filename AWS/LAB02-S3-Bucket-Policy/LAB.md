@@ -40,7 +40,7 @@ Welcome to Lab 02! In this hands-on lab, you'll learn how to create and manage A
    - **Bucket name**: Enter `lab02-yourname-YYYYMMDD` (replace "yourname" with your name and YYYYMMDD with current date)
      - Remember: Bucket names must be globally unique across all AWS accounts
      - Use only lowercase letters, numbers, hyphens, and periods
-   - **AWS Region**: Select `eu-west-1` (Ireland) from the dropdown
+   - **AWS Region**: Bucket will be created in the region you are currently working on
    
    b. **Object Ownership**:
    - Leave the default setting (ACLs disabled)
@@ -81,10 +81,10 @@ Welcome to Lab 02! In this hands-on lab, you'll learn how to create and manage A
    - Size
    - Encryption settings
 3. Notice the **"Open"** and **"Download"** buttons at the top
-4. Try clicking "Open" - you'll likely get an "Access Denied" error since the bucket is private
+4. Clicking "Open" - you'll be able to see the file content
 
 ### Step 3: Create and Upload an HTML File for Website Hosting
-1. On your computer, create a simple HTML file named `index.html` with the following content:
+1. On your computer, create a simple HTML file named `index.html` with the following content (replace '<YOUR-NAME>' with your actual name):
    ```html
    <!DOCTYPE html>
    <html>
@@ -114,7 +114,7 @@ Welcome to Lab 02! In this hands-on lab, you'll learn how to create and manage A
    </head>
    <body>
        <div class="container">
-           <h1>Hello from Amazon S3!</h1>
+           <h1>Welcome to <YOUR-NAME> website</h1>
            <p>This is a static website hosted on Amazon S3.</p>
            <p>Current time when this page was accessed: <span id="datetime"></span></p>
            <script>
@@ -132,7 +132,15 @@ Welcome to Lab 02! In this hands-on lab, you'll learn how to create and manage A
 ### Step 1: Understand Bucket Policies
 A bucket policy is a JSON document that defines access permissions to your bucket and the objects inside it. Let's create a policy that makes our HTML file publicly accessible.
 
-### Step 2: Add a Bucket Policy
+### Step 2: Modify Block Public Access Settings
+1. At the top of the "Permissions" tab, find "Block public access (bucket settings)"
+2. Click **"Edit"**
+3. Uncheck "Block all public access"
+4. A warning will appear - read it carefully to understand the implications
+5. Type "confirm" in the confirmation field
+6. Click **"Save changes"**
+
+### Step 3: Add a Bucket Policy
 1. Navigate to your bucket and click the **"Permissions"** tab
 2. Scroll down to the "Bucket policy" section and click **"Edit"**
 3. Enter the following policy in the editor (replace `YOUR-BUCKET-NAME` with your actual bucket name):
@@ -152,14 +160,6 @@ A bucket policy is a JSON document that defines access permissions to your bucke
    ```
 4. This policy allows anyone to read (GET) objects from your bucket
 5. Click **"Save changes"**
-
-### Step 3: Modify Block Public Access Settings
-1. At the top of the "Permissions" tab, find "Block public access (bucket settings)"
-2. Click **"Edit"**
-3. Uncheck "Block all public access"
-4. A warning will appear - read it carefully to understand the implications
-5. Type "confirm" in the confirmation field
-6. Click **"Save changes"**
 
 ### Step 4: Test Public Access
 1. Return to the "Objects" tab
@@ -225,7 +225,12 @@ aws s3 cp s3://lab02-cli-bucket-YYYYMMDD/cli-test.txt s3-downloads/downloaded-fi
 cat s3-downloads/downloaded-file.txt
 ```
 
-### Step 5: Apply a Bucket Policy Using CLI
+### Step 5: Make Bucket Public
+```bash
+aws s3api put-public-access-block --bucket lab02-cli-bucket-YYYYMMDD --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false"
+```
+
+### Step 6: Apply a Bucket Policy Using CLI
 Create a file named `bucket-policy.json` with the following content (replace with your actual bucket name):
 
 ```json
@@ -246,11 +251,6 @@ Create a file named `bucket-policy.json` with the following content (replace wit
 Apply the policy to your bucket:
 ```bash
 aws s3api put-bucket-policy --bucket lab02-cli-bucket-YYYYMMDD --policy file://bucket-policy.json
-```
-
-### Step 6: Make Bucket Public
-```bash
-aws s3api put-public-access-block --bucket lab02-cli-bucket-YYYYMMDD --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false"
 ```
 
 ### Step 7: Enable Static Website Hosting via CLI
