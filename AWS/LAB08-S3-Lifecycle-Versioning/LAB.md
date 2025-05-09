@@ -126,9 +126,9 @@ By the end of this lab, you will be able to:
    - **Lifecycle rule name**: `transition-old-versions`
    - **Rule scope**: Apply to all objects in the bucket
    - **Lifecycle rule actions**:
-     - Check **Move noncurrent versions of objects between storage classes**
+     - Check **Transition noncurrent versions of objects between storage classes**
      - Check **Permanently delete noncurrent versions of objects**
-5. Under **Move noncurrent versions of objects between storage classes**:
+5. Under **Transition noncurrent versions of objects between storage classes**:
    - **Storage class transitions**:
      - Choose **Glacier Instant Retrieval**
      - Days after objects become noncurrent: `30`
@@ -149,8 +149,8 @@ By the end of this lab, you will be able to:
    - **Rule scope**: Limit the scope to specific object tags
    - **Tag**: Add tag with Key: `archive` and Value: `true`
    - **Lifecycle rule actions**:
-     - Check **Move current versions of objects between storage classes**
-4. Under **Move current versions of objects between storage classes**:
+     - Check **Transition current versions of objects between storage classes**
+4. Under **Transition current versions of objects between storage classes**:
    - **Storage class transitions**:
      - Choose **Standard-IA**
      - Days after object creation: `30`
