@@ -92,25 +92,7 @@ By the end of this lab, you will be able to:
 2. The status will change from "Creating" to "Available" when ready
 3. Note the **Endpoint** and **Port** displayed on the Connectivity & Security tab
 
----
-
-## 🔐 Part 2: Configure Networking
-
-### Step 1: Modify the Security Group
-
-1. Go to **EC2 > Security Groups** in the AWS Console
-2. Find and select the security group that was created for your RDS instance (`rds-mysql-lab-sg`)
-3. Click the **Inbound rules** tab
-4. Click **Edit inbound rules**
-5. Click **Add rule** and set:
-   - **Type**: MySQL/Aurora
-   - **Protocol**: TCP
-   - **Port range**: 3306
-   - **Source**: My IP (this automatically adds your current public IP)
-   - **Description**: MySQL access from my IP
-6. Click **Save rules**
-
-### Step 2: Verify Database Connectivity Settings
+### Step 3: Verify Database Connectivity Settings
 
 1. Go back to **RDS > Databases**
 2. Select your database instance `lab07-mysql-db`
@@ -120,10 +102,13 @@ By the end of this lab, you will be able to:
    - **Port** shows 3306
    - **VPC security groups** shows your security group (`rds-mysql-lab-sg`)
    - **Publicly accessible** is set to Yes
-
+5. Run `telnet` to the database endpoint to make sure it is available:
+   ```bash
+   telnet <DATABASE-ENDPOINT> 3306
+   ```
 ---
 
-## 🔌 Part 3: Connect to the Database
+## 🔌 Part 2: Connect to the Database
 
 ### Step 1: Prepare Your Connection Parameters
 
