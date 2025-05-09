@@ -177,7 +177,7 @@ If you're using MySQL Workbench or another GUI client:
 
 ---
 
-## 📈 Part 4: Monitor with CloudWatch
+## 📈 Part 3: Monitor with CloudWatch
 
 ### Step 1: View Basic RDS Metrics
 
@@ -233,7 +233,7 @@ If you enabled Enhanced Monitoring during database creation:
 
 ---
 
-## 💻 Part 5: Deploy RDS Using AWS CLI
+## 💻 Part 4: Deploy RDS Using AWS CLI
 
 You can deploy the same resources using AWS CLI for automation:
 
