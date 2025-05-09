@@ -96,6 +96,10 @@ A Launch Template defines the configuration for EC2 instances that will be creat
 6. For **Key pair (login)**, select an existing key pair or create a new one
 7. Under **Network settings**, select:
    - **Security groups**: Select the `lab05-web-sg` you created earlier
+   - Click on **Advanced network configuration**
+   - Click on **Add network interface**
+   - Under the network interface settings, set **Auto-assign public IP** to **Enable**
+   - **Why this matters**: Your EC2 instances need public IPs to access the internet for installing packages and receiving traffic from the load balancer. Without a public IP, your instances would need a NAT Gateway to access the internet, which adds complexity and cost.
 8. Expand the **Advanced details** section
 9. Scroll down to **User data** and paste the following script:
    ```bash
@@ -358,8 +362,12 @@ TEMPLATE_ID=$(aws ec2 create-launch-template \
     "ImageId": "ami-0c55b159cbfafe1f0",
     "InstanceType": "t2.micro",
     "KeyName": "YOUR_KEY_NAME",
-    "SecurityGroupIds": ["'$SG_ID'"],
-    "UserData": "'$(base64 -w 0 user-data.sh)'"
+    "UserData": "'$(base64 -w 0 user-data.sh)'",
+    "NetworkInterfaces": [{
+      "DeviceIndex": 0,
+      "AssociatePublicIpAddress": true,
+      "Groups": ["'$SG_ID'"]
+    }]
   }' \
   --query LaunchTemplate.LaunchTemplateId \
   --output text)
@@ -462,6 +470,11 @@ echo "Scaling policy created"
 - Verify the load balancer security group allows inbound traffic on port 80
 - Check that the load balancer is in an "active" state
 - Ensure the target group has registered targets that are healthy
+
+### Instances Cannot Install Software or Access Internet
+- Verify instances have public IPs assigned (check the EC2 console)
+- If you didn't enable auto-assign public IP in the launch template, your instances won't have internet access
+- Alternatively, check if your VPC has a NAT Gateway configured for private subnets
 
 ## 🌀 Cleanup - IMPORTANT!
 
