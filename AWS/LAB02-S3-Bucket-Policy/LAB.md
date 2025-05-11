@@ -84,7 +84,7 @@ Welcome to Lab 02! In this hands-on lab, you'll learn how to create and manage A
 4. Clicking "Open" - you'll be able to see the file content
 
 ### Step 3: Create and Upload an HTML File for Website Hosting
-1. On your computer, create a simple HTML file named `index.html` with the following content (replace '<YOUR-NAME>' with your actual name):
+1. On your computer, create a simple HTML file named `index.html` with the following content (replace 'YOUR-NAME' with your actual name):
    ```html
    <!DOCTYPE html>
    <html>
@@ -114,7 +114,7 @@ Welcome to Lab 02! In this hands-on lab, you'll learn how to create and manage A
    </head>
    <body>
        <div class="container">
-           <h1>Welcome to <YOUR-NAME> website</h1>
+           <h1>Welcome to YOUR-NAME website</h1>
            <p>This is a static website hosted on Amazon S3.</p>
            <p>Current time when this page was accessed: <span id="datetime"></span></p>
            <script>
