@@ -166,7 +166,7 @@ Before creating the EFS file system, we need to configure a security group to co
    - Click "Next"
 
 5. **Configure File System Policy**:
-   - Select "Skip this step" for this lab
+   - Click "Next"
    - For production systems, you can use this to control access permissions
 
 6. **Review and Create**:
