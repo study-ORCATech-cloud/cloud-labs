@@ -106,12 +106,13 @@ We'll build the following architecture:
 4. **Configure General Settings**:
    - **Name**: Enter `lab01b-efs`
    - **Automatic backups**: Uncheck (to avoid costs during this lab)
-   - **Lifecycle management**: Keep default (30 days since last access)
-   - **Performance mode**: Select "General Purpose"
-     > ⚠️ **Note:** Max I/O mode is better for highly parallel workloads but has higher latency
+   - **Lifecycle management**: *Transition into Infrequent Access* Keep default (30 days since last access)
+   - **Lifecycle management**: *Transition into Archive* change to `None`
+   - **Encryption**: Keep "Enable encryption of data at rest" checked
    - **Throughput mode**: Select "Bursting"
      > 💡 **Info:** Bursting provides throughput that scales with file system size
-   - **Encryption**: Keep "Enable encryption of data at rest" checked
+   - **Performance mode**: Select "General Purpose"
+     > ⚠️ **Note:** Max I/O mode is better for highly parallel workloads but has higher latency
    - Click "Next"
 
 5. **Configure Network Access**:
