@@ -33,6 +33,8 @@ For these labs, we recommend creating an IAM user with programmatic access:
 | Lab | Service Focus | Description | Skills Learned |
 |-----|---------------|-------------|----------------|
 | [LAB01-EC2-Instance](./LAB01-EC2-Instance/) | Amazon EC2 | Launch and configure a virtual server | Instance management, SSH access, security groups |
+| [LAB01A-EBS-Volumes](./LAB01A-EBS-Volumes/) | Amazon EBS | Create and manage block storage volumes | Volume creation, attachment, snapshots, resizing |
+| [LAB01B-EFS-File-Systems](./LAB01B-EFS-File-Systems/) | Amazon EFS | Create and configure shared file systems | NFS mounting, multi-AZ access, shared storage |
 | [LAB02-S3-Bucket-Policy](./LAB02-S3-Bucket-Policy/) | Amazon S3 | Create storage buckets with policies | Object storage, bucket policies, permissions |
 | [LAB03-IAM-Users-Groups](./LAB03-IAM-Users-Groups/) | AWS IAM | Manage users, groups and permissions | Identity management, policy creation, security |
 | [LAB04-VPC-Networking](./LAB04-VPC-Networking/) | Amazon VPC | Design a custom virtual network | Subnets, routing, network ACLs, security |

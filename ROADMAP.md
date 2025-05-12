@@ -14,6 +14,8 @@ The labs are organized by cloud provider and progress from basic to advanced tas
 | Lab   | Title                             | Description                                            |
 |--------|----------------------------------|--------------------------------------------------------|
 | LAB01 | EC2 Instance                      | Launch a VM via AWS Console & CLI                      |
+| LAB01A | EBS Volumes                      | Create, attach, and manage block storage               |
+| LAB01B | EFS File Systems                 | Deploy shared file systems across instances            |
 | LAB02 | S3 Bucket                         | Manage object storage & website hosting                |
 | LAB03 | IAM Roles and Policies            | Create IAM users, roles, and apply least privilege     |
 | LAB04 | VPC and Security Groups           | Build custom VPC, subnets, NSGs                        |
