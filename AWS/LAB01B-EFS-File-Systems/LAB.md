@@ -88,22 +88,65 @@ We'll build the following architecture:
 
 ## 📝 Part 1: Create an EFS File System Using the AWS Console (UI)
 
-### Step 1: Create a New EFS File System
+### Step 1: Create a Security Group for EFS
 
-1. **Login to AWS Console**: 
+Before creating the EFS file system, we need to configure a security group to control access to it:
+
+1. **Navigate to EC2 Service**:
    - Visit [https://console.aws.amazon.com](https://console.aws.amazon.com) and log in with your credentials
-   - Make sure you're in the same region where your EC2 instance from LAB01 is running
+   - Type "EC2" in the search bar at the top of the console
+   - Click on the "EC2" service that appears in the dropdown menu
 
-2. **Navigate to EFS Service**:
+2. **Navigate to Security Groups**:
+   - In the left sidebar, under "Network & Security", click on "Security Groups"
+
+3. **Create a New Security Group**:
+   - Click "Create security group"
+   - For the basic details:
+     - Name: `efs-access-sg`
+     - Description: "Allow NFS traffic for EFS"
+     - VPC: Select your default VPC
+
+4. **Add Inbound Rule**:
+   - In the "Inbound rules" section, click "Add rule"
+   - Type: NFS (port 2049)
+   - Source: Custom
+   - Enter the security group ID of your EC2 instance from LAB01
+   > 💡 **Best Practice:** This ensures only EC2 instances with that security group can access your EFS
+
+5. **Add Tags**:
+   - In the "Tags" section, click "Add tag"
+   - Key = "Name", Value = "efs-access-sg"
+
+6. **Create the Security Group**:
+   - Click "Create security group"
+   - Note the security group ID for later use
+
+7. **Update the EC2 Security Group**:<br>
+   This is only required in case your outbound rules are not set to the default values
+   - Find and select the security group that's attached to your EC2 instance
+   - Click on the "Outbound rules" tab
+   - Click "Edit outbound rules"
+   - Click "Add rule"
+   - For the new rule:
+     - Type: NFS (port 2049)
+     - Destination: Custom
+     - Enter the ID of your new EFS security group (`efs-access-sg`)
+     - Description: "Allow outbound to EFS"
+   - Click "Save rules"
+
+### Step 2: Create a New EFS File System
+
+1. **Navigate to EFS Service**:
    - Type "EFS" in the search bar at the top of the console
    - Click on the "EFS" service that appears in the dropdown menu
 
-3. **Create a File System**:
+2. **Create a File System**:
    - Click the "Create file system" button
    - For a quick creation, you could use the "Create" button, but we'll customize settings:
    - Click "Customize" to access advanced settings
 
-4. **Configure General Settings**:
+3. **Configure General Settings**:
    - **Name**: Enter `lab01b-efs`
    - **Automatic backups**: Uncheck (to avoid costs during this lab)
    - **Lifecycle management**: Keep "Transition into Infrequent Access" default (30 days since last access)
@@ -115,58 +158,21 @@ We'll build the following architecture:
      > ⚠️ **Note:** Max I/O mode is better for highly parallel workloads but has higher latency
    - Click "Next"
 
-5. **Configure Network Access**:
+4. **Configure Network Access**:
    - Your default VPC should be selected
    - You'll see a list of all available subnets (one per availability zone)
    - For Mount targets, ensure all subnets are selected
-   - For each subnet, you can:
-     - Use the default security group, or
-     - Create a new security group by clicking the "Create security group" link (recommended)
-   - Click "Create security group" link
-   - In the new tab that opens:
-     - Name: `efs-access-sg`
-     - Description: "Allow NFS traffic for EFS"
-     - VPC: Select your default VPC
-     - Add inbound rule:
-       - Type: NFS (port 2049)
-       - Source: Custom
-       - Enter the security group ID of your EC2 instance from LAB01
-       > 💡 **Best Practice:** This ensures only EC2 instances with that security group can access your EFS
-     - Add tag: Key = "Name", Value = "efs-access-sg"
-     - Click "Create security group"
-   - Return to the EFS creation tab
-   - Refresh the security group dropdown and select your new `efs-access-sg` for each subnet
+   - For each subnet, select your previously created security group `efs-access-sg` from the dropdown
    - Click "Next"
 
-6. **Configure File System Policy**:
+5. **Configure File System Policy**:
    - Select "Skip this step" for this lab
    - For production systems, you can use this to control access permissions
 
-7. **Review and Create**:
+6. **Review and Create**:
    - Review your settings
    - Click "Create" to create your EFS file system
    - Wait for the file system status to become "Available"
-
-### Step 2: Update EC2 Security Group
-
-1. **Navigate to EC2 Service**:
-   - Type "EC2" in the search bar at the top of the console
-   - Click on the "EC2" service that appears in the dropdown menu
-
-2. **Navigate to Security Groups**:
-   - In the left sidebar, under "Network & Security", click on "Security Groups"
-   - Find and select the security group that's attached to your EC2 instance
-   
-3. **Add Outbound Rule for EFS**:
-   - With your security group selected, click on the "Outbound rules" tab
-   - Click "Edit outbound rules"
-   - Click "Add rule"
-   - For the new rule:
-     - Type: NFS (port 2049)
-     - Destination: Custom
-     - Enter the ID of your EFS security group (`efs-access-sg`)
-     - Description: "Allow outbound to EFS"
-   - Click "Save rules"
 
 ### Step 3: Mount the EFS File System on Your EC2 Instance
 
