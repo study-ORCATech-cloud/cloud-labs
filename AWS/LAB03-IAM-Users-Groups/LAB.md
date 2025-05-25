@@ -243,7 +243,8 @@ First, create a file named `specific-bucket-policy.json` with the following cont
             ],
             "Resource": [
                 "arn:aws:s3:::YOUR-SPECIFIC-BUCKET-NAME",
-                "arn:aws:s3:::YOUR-SPECIFIC-BUCKET-NAME/*"
+                "arn:aws:s3:::YOUR-SPECIFIC-BUCKET-NAME/*",
+                "arn:aws:s3:::*"
             ]
         }
     ]
