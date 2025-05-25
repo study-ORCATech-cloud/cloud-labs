@@ -238,6 +238,7 @@ First, create a file named `specific-bucket-policy.json` with the following cont
             "Effect": "Allow",
             "Action": [
                 "s3:ListBucket",
+                "s3:ListAllMyBuckets",
                 "s3:GetObject"
             ],
             "Resource": [
