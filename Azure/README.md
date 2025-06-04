@@ -77,6 +77,23 @@ Most labs can be completed within the Azure Free Tier limits if you:
 - Monitor your cost analysis dashboard
 - Set up budget alerts (covered in LAB06)
 
+## 🔁 AWS ⇄ Azure Resource Mapping
+
+If you're familiar with AWS and transitioning to Azure, the following table will help you understand the Azure equivalents for commonly used AWS services:
+
+| **AWS Service** | **Purpose** | **Azure Equivalent** | **Notes** |
+|------------------|-------------|-----------------------|------------|
+| **EC2 (Elastic Compute Cloud)** | Virtual Machines (VMs) | **Azure Virtual Machines** | Both provide scalable compute instances. |
+| **Lambda** | Serverless compute | **Azure Functions** | Event-driven, serverless compute. |
+| **ASG (Auto Scaling Group)** | Automatic scaling of EC2 | **Virtual Machine Scale Sets (VMSS)** | VMSS handles scaling and load balancing. |
+| **ELB (Elastic Load Balancer)** | Load balancing traffic | **Azure Load Balancer** (L4) / **Azure Application Gateway** (L7) | Use Load Balancer for TCP/UDP; App Gateway for HTTP/HTTPS with routing. |
+| **VPC (Virtual Private Cloud)** | Isolated network | **Azure Virtual Network (VNet)** | Both allow for subnetting, IP ranges, gateways. |
+| **Route 53** | DNS and domain management | **Azure DNS** / **Azure Traffic Manager** | Azure DNS handles domain records; Traffic Manager adds global routing. |
+| **S3 (Simple Storage Service)** | Object storage | **Azure Blob Storage** | Azure offers similar object storage, supports hot/cold/archive tiers. |
+| **EBS (Elastic Block Store)** | Block storage for VMs | **Azure Managed Disks** | Both are durable, high-performance block storage for VMs. |
+| **EFS (Elastic File System)** | Shared file system (NFS) | **Azure Files** | Fully managed SMB/NFS shared file system. |
+| **IAM (Identity & Access Management)** | Access control | **Azure Active Directory (AAD)** + **Azure RBAC** | AAD handles identities; RBAC manages access to resources. |
+
 ## 🔍 Troubleshooting
 
 If you encounter issues:
